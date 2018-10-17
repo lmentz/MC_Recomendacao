@@ -1,0 +1,558 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{SGD}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Implementando nosso sistema de recomendação em Python usando
+Gradiente Descendente Estocástico
+(SGD)}\label{implementando-nosso-sistema-de-recomendauxe7uxe3o-em-python-usando-gradiente-descendente-estocuxe1stico-sgd}
+
+    SGD e ALS são dois algoritmos amplamente utilizados para fatorar a
+matriz de scores (usuário x item) em duas matrizes de dimensões menores,
+com o benefício de fazer as atualizações do modelo mais fáceis.
+
+\emph{Recapitulando algumas coisas}: - \textbf{Filtragem Colaborativa}
+tem como principal vantagem o fato de ser capaz de recomendar itens
+complexos sem nenhum conhecimento anterior do item. - \textbf{Baseados
+em Memória} usam a \textbf{similaridade} entre itens ou usuários, ex.
+usando a similaridade de cossenos.\\
+- \textbf{Baseados em Modelos} usam fatoração de matrizes.
+
+*O objetivo principal do algoritmo de fatoração de matrizes é modelar os
+ratings preditos através da minimização do erro quadrático relativo à
+matriz de fatores latentes de usuário \(P\) e a matriz de fatores
+latentes de itens \(Q\), sobre o conjunto de ratings reais:
+
+Onde \(K\) é um conjunto de pares \((u,i)\) tal que o rating é conhecido
+no conjunto de treino: por exemplo, \(r_{ui}\) é o rating do item \(i\)
+dado pelo usuário \(u\) no conjunto de treino, e \(\lambda\) é o
+parâmetro de regularização para evitar overfiting. O erro quadrático
+regularizado é a \textbf{função de perda} que você almeja minimizar.
+Depois de estimados \(P\) e \(Q\) através da minimização do erro
+quadrático, é possível prever os ratings desconhecidos pelo produto
+escalar dos fatores latentes dos usuários e dos itens.
+
+O \textbf{gradiente descendente estocástico (SGD)} ou \textbf{método dos
+mínimos quadrados alternados (ALS)} pode ser aplicado para minimizar a
+função de perda. Ambos \emph{SGD} e \emph{ALS} podem ser usados para
+aprendizagem em tempo real, ou seja, atualizar o modelo de maneira
+incremental a cada vez que um novo rating é registrado.
+
+    \subsection{Pré-processamento}\label{pruxe9-processamento}
+
+    Aqui será utilizado o dataset MovieLens, onde você deve adicionar os
+arquivos descompactados do dataset em sua pasta de trabalho do Jupyter
+Notebook. O dataset pode ser baixado
+\href{http://files.grouplens.org/datasets/movielens/ml-100k.zip}{aqui}.
+Primeiro, leia o arquivo \textbf{u.data} que contém o dataset completo.
+Uma descrição rápida do dataset pode ser encontrada
+\href{http://files.grouplens.org/datasets/movielens/ml-100k-README.txt}{aqui}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{n}{header} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./ml\PYZhy{}100k/u.data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{n}{header}\PY{p}{)}
+        \PY{n}{n\PYZus{}users} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{user\PYZus{}id}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{n\PYZus{}items} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{item\PYZus{}id}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of users = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n\PYZus{}users}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ | Number of movies = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n\PYZus{}items}\PY{p}{)}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of users = 943 | Number of movies = 1682
+
+    \end{Verbatim}
+
+    Você pode usar a biblioteca do
+\href{http://scikit-learn.org/stable/}{\texttt{scikit-learn}} para
+dividir o dataset em duas porções de treino e teste. Ela mistura e
+divide os dados em dois datasets de acordo com a percentagem de exemplos
+de teste (\texttt{test\_size}), que nesse caso é 0.25. O próximo passo
+será criar a matriz de ratings. Como teremos dados de treino e teste
+será necessário a criação de duas matrizes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{)}
+        
+        \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}
+        \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Create training and test matrix}
+        \PY{n}{R} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}users}\PY{p}{,} \PY{n}{n\PYZus{}items}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{train\PYZus{}data}\PY{o}{.}\PY{n}{itertuples}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{R}\PY{p}{[}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}  
+        
+        \PY{n}{T} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n\PYZus{}users}\PY{p}{,} \PY{n}{n\PYZus{}items}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{test\PYZus{}data}\PY{o}{.}\PY{n}{itertuples}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{T}\PY{p}{[}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+    As matrizes \(I\) e \(I2\) servirão como um seletor de matrizes, elas
+separarão os ratings apropriados de acordo com a atualização das
+equações durante o treino sobre o dataset de treino (usando \(I\)) e de
+predição sobre o dataset de teste (usando \(I2\)).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Index matrix for training data}
+        \PY{n}{I} \PY{o}{=} \PY{n}{R}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{I}\PY{p}{[}\PY{n}{I} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{I}\PY{p}{[}\PY{n}{I} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+        
+        \PY{c+c1}{\PYZsh{} Index matrix for test data}
+        \PY{n}{I2} \PY{o}{=} \PY{n}{T}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{I2}\PY{p}{[}\PY{n}{I2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        \PY{n}{I2}\PY{p}{[}\PY{n}{I2} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+
+    \subsection{Gradiente Descendente Estocástico com Regularização por
+Lambda Ponderado
+(SGD-WR)}\label{gradiente-descendente-estocuxe1stico-com-regularizauxe7uxe3o-por-lambda-ponderado-sgd-wr}
+
+Ao utilizar Filtragem Colaborativa com Gradiente Descendente
+Estocástico, é necessário estimar duas matrizes - a matriz de fatores
+latentes do usuário \(P\) e a matriz de fatores latentes dos itens
+\(Q\). Após estimadas \(P\) e \(Q\), podem ser preditos os ratings
+desconhecidos através do produto escalar das matrizes de fatores
+latentes de usuário e item. 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Predict the unknown ratings through the dot product of the latent features for users and items }
+        \PY{k}{def} \PY{n+nf}{prediction}\PY{p}{(}\PY{n}{P}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{P}\PY{o}{.}\PY{n}{T}\PY{p}{,}\PY{n}{Q}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Definição matemática do gradiente descendente estocástico
+quando utilizado para minimizar o erro quadrático regularizado (função
+de
+perda):}\label{definiuxe7uxe3o-matemuxe1tica-do-gradiente-descendente-estocuxe1stico-quando-utilizado-para-minimizar-o-erro-quadruxe1tico-regularizado-funuxe7uxe3o-de-perda}
+
+Para atualizar \(P\) e \(Q\), pode-se utilizar o gradiente descendente
+estocástico onde tu itera sobre cada observação (linha) no conjunto de
+treino e atualiza \(Q\) e \(P\) da seguinte maneira:
+
+onde \(\gamma\) é a taxa de aprendizagem e \(\lambda\) é o parâmetro de
+regularização. O erro \((e)\) para o elemento \((u,i)\) é a diferença
+entre o rating predito e o rating real.
+
+Iniciamos definindo os parâmetros do algoritmo \(\lambda\) (peso de
+regularização) e \(k\) (dimensionalidade do espaço de fatores latentes),
+também iniciando as matrizes de fatores latentes \(P\) e \(Q\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{lmbda} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{c+c1}{\PYZsh{} Regularisation weight}
+        \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{20}  \PY{c+c1}{\PYZsh{} Dimensionality of the latent feature space}
+        \PY{n}{m}\PY{p}{,} \PY{n}{n} \PY{o}{=} \PY{n}{R}\PY{o}{.}\PY{n}{shape}  \PY{c+c1}{\PYZsh{} Number of users and items}
+        \PY{n}{n\PYZus{}epochs} \PY{o}{=} \PY{l+m+mi}{100}  \PY{c+c1}{\PYZsh{} Number of epochs}
+        \PY{n}{gamma}\PY{o}{=}\PY{l+m+mf}{0.01}  \PY{c+c1}{\PYZsh{} Learning rate}
+        
+        \PY{n}{P} \PY{o}{=} \PY{l+m+mi}{3} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{m}\PY{p}{)} \PY{c+c1}{\PYZsh{} Latent user feature matrix}
+        \PY{n}{Q} \PY{o}{=} \PY{l+m+mi}{3} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{n}\PY{p}{)} \PY{c+c1}{\PYZsh{} Latent movie feature matrix}
+\end{Verbatim}
+
+
+    Existem várias métricas de avaliação, mas uma das mais populares
+utilizadas para avaliar a acurácia de ratings preditos é o Erro
+Quadrático Médio (RMSE), que vamos utilizar nesse tutorial:
+
+onde \(N\) é o número de observações (linhas), \(r_i\) é o rating real
+para a observação (linha) \(i\) e \(\hat{r_i}\) é o rating predito. Como
+desejamos considerar apenas os ratings preditos que estão presentes nos
+conjuntos de treino e teste, filtramos todos os outros ratings na matriz
+de predição usando \texttt{I} e \texttt{R{[}R\ \textgreater{}\ 0{]}}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Calculate the RMSE}
+        \PY{k}{def} \PY{n+nf}{rmse}\PY{p}{(}\PY{n}{I}\PY{p}{,}\PY{n}{R}\PY{p}{,}\PY{n}{Q}\PY{p}{,}\PY{n}{P}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{I} \PY{o}{*} \PY{p}{(}\PY{n}{R} \PY{o}{\PYZhy{}} \PY{n}{prediction}\PY{p}{(}\PY{n}{P}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{R}\PY{p}{[}\PY{n}{R} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Agora implementaremos o SGD-WR onde utilizaremos as equações
+\texttt{(3)}, \texttt{(4)}, \texttt{(5)} definidas anteriormente.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{train\PYZus{}errors} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{test\PYZus{}errors} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}Only consider non\PYZhy{}zero matrix }
+        \PY{n}{users}\PY{p}{,}\PY{n}{items} \PY{o}{=} \PY{n}{R}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}      
+        \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}epochs}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{u}\PY{p}{,} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{users}\PY{p}{,}\PY{n}{items}\PY{p}{)}\PY{p}{:}
+                \PY{n}{e} \PY{o}{=} \PY{n}{R}\PY{p}{[}\PY{n}{u}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{prediction}\PY{p}{(}\PY{n}{P}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{u}\PY{p}{]}\PY{p}{,}\PY{n}{Q}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Calculate error for gradient}
+                \PY{n}{P}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{u}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{gamma} \PY{o}{*} \PY{p}{(} \PY{n}{e} \PY{o}{*} \PY{n}{Q}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{lmbda} \PY{o}{*} \PY{n}{P}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{u}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} Update latent user feature matrix}
+                \PY{n}{Q}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{gamma} \PY{o}{*} \PY{p}{(} \PY{n}{e} \PY{o}{*} \PY{n}{P}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{u}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{lmbda} \PY{o}{*} \PY{n}{Q}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Update latent movie feature matrix}
+            \PY{n}{train\PYZus{}rmse} \PY{o}{=} \PY{n}{rmse}\PY{p}{(}\PY{n}{I}\PY{p}{,}\PY{n}{R}\PY{p}{,}\PY{n}{Q}\PY{p}{,}\PY{n}{P}\PY{p}{)} \PY{c+c1}{\PYZsh{} Calculate root mean squared error from train dataset}
+            \PY{n}{test\PYZus{}rmse} \PY{o}{=} \PY{n}{rmse}\PY{p}{(}\PY{n}{I2}\PY{p}{,}\PY{n}{T}\PY{p}{,}\PY{n}{Q}\PY{p}{,}\PY{n}{P}\PY{p}{)} \PY{c+c1}{\PYZsh{} Calculate root mean squared error from test dataset}
+            \PY{n}{train\PYZus{}errors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train\PYZus{}rmse}\PY{p}{)}
+            \PY{n}{test\PYZus{}errors}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test\PYZus{}rmse}\PY{p}{)}
+            
+            \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[Epoch }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{/}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{] train error: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{, test error: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PYZbs{}
+            \PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{epoch}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}epochs}\PY{p}{,} \PY{n}{train\PYZus{}rmse}\PY{p}{,} \PY{n}{test\PYZus{}rmse}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Algorithm converged}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Como foram guardados todos os \texttt{train\_errors} e
+\texttt{test\_errors} para cada época, podemos plotar as curva de
+aprendizagem do algoritmo SGD-WR.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Check performance by plotting train and test errors}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}epochs}\PY{p}{)}\PY{p}{,} \PY{n}{train\PYZus{}errors}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}epochs}\PY{p}{)}\PY{p}{,} \PY{n}{test\PYZus{}errors}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SGD\PYZhy{}WR Learning Curve}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RMSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    O modelo parece se comportar muito bem, com um RMSE relativamente baixo
+apor convergir. A performance pode ser influenciada através da
+calibragem dos parâmetros \(\lambda\), \(\gamma\) and \(k\).
+
+A seguir tu podes comparar o rating real com o rating predito. Para
+isso, primeiro calcula-se a matriz de rating preditos - para a qual
+utilizaremos a função \texttt{prediction} que foi definida
+anteriormente, e converter a matriz em um dataframe para facilitar o
+uso. 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Calculate prediction matrix R\PYZus{}hat (low\PYZhy{}rank approximation for R)}
+        \PY{n}{R} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{R}\PY{p}{)}
+        \PY{n}{R\PYZus{}hat}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{prediction}\PY{p}{(}\PY{n}{P}\PY{p}{,}\PY{n}{Q}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Para se ter uma ideia do que foi atingido, vamos comparar algumas de
+nossas predições para o usuário \texttt{29} com seus ratings reais.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Compare true ratings of user 17 with predictions}
+        \PY{n}{ratings} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{R}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{28}\PY{p}{,}\PY{n}{R}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{28}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{ratings}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{R\PYZus{}hat}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{28}\PY{p}{,}\PY{n}{R}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{28}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{ratings}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actual Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{ratings}
+\end{Verbatim}
+
+
+    \subsection{Referências}\label{referuxeancias}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://citeseer.ist.psu.edu/viewdoc/download;jsessionid=8413B85890576DE006023342D58E8E67?doi=10.1.1.147.8295\&rep=rep1\&type=pdf}{Koren
+  et al. (2009)} Koren, Y., Bell, R.M., Volinsky, C.: Matrix
+  factorization techniques for recommender systems. IEEE Computer 42(8),
+  30--37 (2009) 32 Francesco Ricci, Lior Rokach and Bracha Shapira
+\end{itemize}
+
+    Este tutorial foi adaptado a partir do tutorial de Agnes Johannsdottir e
+Moritz Haller.
+
+Agnes is a master student in Business Analytics at University College
+London. She studied Management Engineering in Iceland and worked for 2
+years as an IT consultant in supply chain. Her main interests lie in
+using data science methods (especially machine learning) to apply in
+Retail and Supply Chain businesses.
+
+Moritz has spent the past years in industry, working on business
+intelligence applications with the company he co-founded. He holds a BSc
+in Computer Science and is currently pursuing an MSc in Computer Science
+at University College London. His main interests lie in probabilistic
+modelling and machine learning.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
